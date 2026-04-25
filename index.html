@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Build a stunning professional resume in minutes with CareerCraft." />
+  <title>CareerCraft – Craft Your Perfect Resume</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">CareerCraft</span>
+          <span class="logo-tag">by Aditya Sehrawat</span>
+        </div>
+      </div>
+
+      <div class="completion-wrap">
+        <div class="completion-label">
+          <i class="fa-solid fa-chart-simple"></i>
+          <span>Completeness</span>
+          <strong id="scoreVal">0%</strong>
+        </div>
+        <div class="completion-track">
+          <div class="completion-fill" id="completionFill"></div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="theme-picker">
+          <span class="theme-label">Theme</span>
+          <button class="theme-dot active" data-theme="violet" title="Violet"></button>
+          <button class="theme-dot" data-theme="ocean" title="Ocean"></button>
+          <button class="theme-dot" data-theme="sunset" title="Sunset"></button>
+          <button class="theme-dot" data-theme="emerald" title="Emerald"></button>
+        </div>
+        <button id="resetBtn" class="btn btn-ghost"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        <button id="downloadBtn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Download PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <section class="form-panel">
+
+      <div class="step-indicator" role="tablist">
+        <div class="step active" data-step="1" role="tab" tabindex="0">
+          <div class="step-circle"><i class="fa-solid fa-user"></i></div>
+          <span class="step-label">Personal</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2" role="tab" tabindex="0">
+          <div class="step-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+          <span class="step-label">Education</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3" role="tab" tabindex="0">
+          <div class="step-circle"><i class="fa-solid fa-briefcase"></i></div>
+          <span class="step-label">Experience</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4" role="tab" tabindex="0">
+          <div class="step-circle"><i class="fa-solid fa-star"></i></div>
+          <span class="step-label">Skills</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5" role="tab" tabindex="0">
+          <div class="step-circle"><i class="fa-solid fa-code"></i></div>
+          <span class="step-label">Projects</span>
+        </div>
+      </div>
+
+      <div class="form-step active" id="step-1">
+        <div class="form-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap"><i class="fa-solid fa-user-circle"></i></div>
+            <div>
+              <h2 class="form-card-title">Personal Information</h2>
+              <p class="form-card-subtitle">Let's start with the basics about you</p>
+            </div>
+          </div>
+
+          <div class="personal-top">
+            <div class="photo-upload-area" id="photoUploadArea">
+              <input type="file" id="photoInput" accept="image/*" hidden />
+              <div class="photo-circle" id="photoCircle">
+                <i class="fa-solid fa-camera"></i>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="personal-fields">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Full Name <span class="required">*</span></label>
+                  <input type="text" id="fullName" placeholder="e.g. Aditya Sehrawat" maxlength="60" />
+                </div>
+                <div class="form-group">
+                  <label for="jobTitle">Job Title / Role</label>
+                  <input type="text" id="jobTitle" placeholder="e.g. Full Stack Developer" maxlength="60" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email <span class="required">*</span></label>
+                  <input type="email" id="email" placeholder="aditya@example.com" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" placeholder="+91 98765 43210" maxlength="20" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="e.g. Chandigarh, India" maxlength="60" />
+            </div>
+            <div class="form-group">
+              <label for="website">Portfolio / LinkedIn</label>
+              <input type="url" id="website" placeholder="https://linkedin.com/in/aditya" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="github">GitHub</label>
+              <input type="url" id="github" placeholder="https://github.com/aditya-sehrawat" />
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of Birth (optional)</label>
+              <input type="date" id="dob" />
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="summary">Professional Summary <span class="required">*</span></label>
+            <textarea id="summary" rows="4" placeholder="Write a powerful 2-4 sentence summary highlighting your skills, experience, and what you bring to the table…" maxlength="600"></textarea>
+            <div class="char-counter"><span id="summaryCount">0</span> / 600</div>
+          </div>
+        </div>
+        <div class="step-nav">
+          <div></div>
+          <button class="btn btn-next" onclick="goToStep(2)">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step" id="step-2">
+        <div class="form-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div>
+              <h2 class="form-card-title">Education</h2>
+              <p class="form-card-subtitle">Add your academic qualifications</p>
+            </div>
+          </div>
+          <div id="educationList"></div>
+          <button class="btn btn-add" id="addEducationBtn"><i class="fa-solid fa-circle-plus"></i> Add Education</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-back" onclick="goToStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="btn btn-next" onclick="goToStep(3)">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step" id="step-3">
+        <div class="form-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
+            <div>
+              <h2 class="form-card-title">Work Experience</h2>
+              <p class="form-card-subtitle">Add internships, jobs, or freelance work</p>
+            </div>
+          </div>
+          <div id="experienceList"></div>
+          <button class="btn btn-add" id="addExpBtn"><i class="fa-solid fa-circle-plus"></i> Add Experience</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-back" onclick="goToStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="btn btn-next" onclick="goToStep(4)">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step" id="step-4">
+        <div class="form-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap"><i class="fa-solid fa-star"></i></div>
+            <div>
+              <h2 class="form-card-title">Skills & Languages</h2>
+              <p class="form-card-subtitle">Showcase your technical and soft skills</p>
+            </div>
+          </div>
+
+          <div class="skills-input-row">
+            <input type="text" id="skillInput" placeholder="Type a skill and press Enter…" maxlength="40" />
+            <select id="skillCategory">
+              <option value="Technical">Technical</option>
+              <option value="Soft Skills">Soft Skills</option>
+              <option value="Tools">Tools</option>
+              <option value="Other">Other</option>
+            </select>
+            <button class="btn btn-add-skill" id="addSkillBtn"><i class="fa-solid fa-plus"></i> Add</button>
+          </div>
+          <div id="skillsContainer" class="skills-container"></div>
+
+          <div class="form-group full-width" style="margin-top: 1.5rem;">
+            <label for="languages">Languages Known</label>
+            <input type="text" id="languages" placeholder="e.g. English (Fluent), Hindi (Native), French (Beginner)" maxlength="150" />
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 1rem;">
+            <label for="achievements">Achievements & Certifications</label>
+            <textarea id="achievements" rows="4" placeholder="• Won 1st place at Hackathon 2024&#10;• AWS Certified Solutions Architect&#10;• Google Developer Student Club Lead" maxlength="800"></textarea>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-back" onclick="goToStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="btn btn-next" onclick="goToStep(5)">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step" id="step-5">
+        <div class="form-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap"><i class="fa-solid fa-code"></i></div>
+            <div>
+              <h2 class="form-card-title">Projects</h2>
+              <p class="form-card-subtitle">Showcase your best work</p>
+            </div>
+          </div>
+          <div id="projectList"></div>
+          <button class="btn btn-add" id="addProjectBtn"><i class="fa-solid fa-circle-plus"></i> Add Project</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-back" onclick="goToStep(4)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="btn btn-primary" id="finishBtn"><i class="fa-solid fa-check-circle"></i> Finish &amp; Preview</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="preview-panel" aria-label="Resume preview">
+      <div class="preview-header">
+        <span><i class="fa-solid fa-eye"></i> Live Preview</span>
+        <span class="preview-scale-note">Updates as you type</span>
+      </div>
+      <div class="preview-wrapper">
+        <div class="resume-preview" id="resumePreview" data-theme="violet">
+
+          <div class="rp-header">
+            <div class="rp-header-left">
+              <div class="rp-name" id="rp-name">Your Name</div>
+              <div class="rp-title" id="rp-title">Your Job Title</div>
+              <div class="rp-contact" id="rp-contact">
+                <span id="rp-email"><i class="fa-solid fa-envelope"></i> email@example.com</span>
+                <span id="rp-phone"></span>
+                <span id="rp-location"></span>
+              </div>
+              <div class="rp-links" id="rp-links"></div>
+            </div>
+            <div class="rp-photo-wrap">
+              <img class="rp-photo" id="rp-photo" src="" alt="Profile" style="display:none;" />
+            </div>
+          </div>
+
+          <div class="rp-section" id="rp-summary-section">
+            <div class="rp-section-title">Profile Summary</div>
+            <div class="rp-section-body" id="rp-summary">Your professional summary will appear here…</div>
+          </div>
+
+          <div class="rp-section" id="rp-exp-section">
+            <div class="rp-section-title">Experience</div>
+            <div class="rp-section-body" id="rp-experience">
+              <p class="rp-placeholder">Work experience will appear here…</p>
+            </div>
+          </div>
+
+          <div class="rp-section" id="rp-education-section">
+            <div class="rp-section-title">Education</div>
+            <div class="rp-section-body" id="rp-education">
+              <p class="rp-placeholder">Education details will appear here…</p>
+            </div>
+          </div>
+
+          <div class="rp-section" id="rp-skills-section">
+            <div class="rp-section-title">Skills</div>
+            <div class="rp-section-body" id="rp-skills">
+              <p class="rp-placeholder">Your skills will appear here…</p>
+            </div>
+          </div>
+
+          <div class="rp-section" id="rp-projects-section">
+            <div class="rp-section-title">Projects</div>
+            <div class="rp-section-body" id="rp-projects">
+              <p class="rp-placeholder">Project details will appear here…</p>
+            </div>
+          </div>
+
+          <div class="rp-section" id="rp-achievements-section">
+            <div class="rp-section-title">Achievements & Certifications</div>
+            <div class="rp-section-body" id="rp-achievements">
+              <p class="rp-placeholder">Achievements will appear here…</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -8,7 +8,7 @@ Features
 - Resume scoring system
 
 Live Demo
-https://career-craft-ai.vercel.app
+[https://career-craft-ai.vercel.app](https://career-craft-ai-liard.vercel.app/)
 
 Tech Stack
 - HTML

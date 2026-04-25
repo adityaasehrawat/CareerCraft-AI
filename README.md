@@ -1,20 +1,18 @@
-# CareerCraft AI 🚀
-
+CareerCraft AI
 An AI-powered resume builder designed to help students prepare for placements.
 
-## 🔥 Features
+Features
 - Multi-step resume builder
 - Live preview
 - Download as PDF
 - Resume scoring system
 
-## 🌐 Live Demo
+Live Demo
 https://career-craft-ai.vercel.app
 
-## 📂 Tech Stack
+Tech Stack
 - HTML
 - CSS
 - JavaScript
-
-## 🎯 Purpose
+Purpose
 Built for IIT Ropar Hackathon to help students create professional resumes quickly.
